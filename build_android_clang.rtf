@@ -1,0 +1,55 @@
+{\rtf1\ansi\ansicpg936\cocoartf2576
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset134 PingFangSC-Regular;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww16900\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs36 \cf0 #!/bin/bash\
+set -x\
+# 
+\f1 \'c4\'bf\'b1\'ea
+\f0 Android
+\f1 \'b0\'e6\'b1\'be
+\f0 \
+API=21\
+CPU=arm7-a\
+# so
+\f1 \'bf\'e2\'ca\'e4\'b3\'f6\'c4\'bf\'c2\'bc\
+OUTPUT=/Users\'a1\'ad\'a1\'ad..\
+# NDK\'b5\'c4\'c2\'b7\'be\'b6\
+NDK=/User\'a1\'ad\
+# \'b1\'e0\'d2\'eb\'b9\'a4\'be\'df\'c1\'b4\'c2\'b7\'be\'b6\
+TOOLCHAIN=$NDK/toolchains/llvm/prebuilt/darwin-x86_64\
+# \'b1\'e0\'d2\'eb\'bb\'b7\'be\'b3\
+SYSROOT=$TOOLCHAIN/sysroot\
+\
+Function build\
+\{\
+	./configure \\\
+     - -prefix=$OUTPUT \\\
+	- -target-os=android \\\
+     - -arch=arm \\\
+	- -cpu=arm7-a \\\
+     - -enable-asm \\\
+	- -enable-cross-compile \\\
+	- -enable-shared \\\
+     - -disable -static \\\
+	- -disable -doc \\\
+	- -disable-ffplay \\\
+     - -disable-ffprobe \\\
+	- -disable-symver \\\
+	- -disable-ffmpeg \\\
+	- -sysroot=$SYSROOT \\\
+	- -cross-prefix=$TOOLCHAIN/bin/arm-linux-androidabi- \\\
+	- -cross-prefix-clang=$TOOLCHAIN/bin/arm7a-linux-androideabia$API- \\\
+	- - extra-cflags=\'a1\'b0-fPIC\'a1\'b1\
+     \
+\
+	make clean all\
+	#\'b6\'a8\'d2\'e5CPU\'b1\'e0\'d2\'eb\
+	make -j12\
+	make install\
+\}\
+\
+build}
